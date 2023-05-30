@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Forum;
+use App\Models\Comment;
 
 
 
@@ -24,6 +25,10 @@ class Post extends Model
     }
     public function forum()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Forum::class);
+    }
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

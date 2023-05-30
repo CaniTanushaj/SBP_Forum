@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Forum;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -56,9 +57,9 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(post $post)
+    public function show(forum $forum,post $post)
     {
-        return view('post.show',compact('post'));
+        return view('post.show',compact('forum','post'));
     }
 
     /**

@@ -59,8 +59,11 @@
             </div>
         @endif
 <div class="container">
+@if (Route::has('login'))
+@auth
 <a class="btn btn-outline-dark mt-2" href="{{ route('forum.create') }}"> Create Forum</a>
-
+@endauth
+@endif
 
 
 
@@ -93,13 +96,13 @@
                             {{-- Likes --}}
                             <div class="flex space-x-5 text-gray-500">
                                 
-                                    <span class="text-xs font-bold">Posted by:{{$forum->user->name}}</span>
+                                    <span class="text-xs font-bold"><b>Posted by:</b> {{$forum->user->name}}</span>
                                 
                             </div>
 
                             {{-- Date Posted --}}
                             <div class="flex items-center text-xs text-gray-500">
-                            Date: {{ \Carbon\Carbon::createFromTimestamp(strtotime($forum->created_at))->format('d-m-Y   h:i:s  ')}}
+                            <b>Date:</b>  {{ \Carbon\Carbon::createFromTimestamp(strtotime($forum->created_at))->format('d-m-Y   h:i:s  ')}}
                             @if (Route::has('login'))
                             @auth
                             @if($forum->user->id==Auth::user()->id)

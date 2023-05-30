@@ -60,15 +60,67 @@
         @endif
 <div class="container">
 <h2 class="mt-2">{{$forum->name}}</h2>
+<hr>
 <a class="btn btn-outline-dark mt-2" href="{{ route('forum.post.create',$forum->id) }}"> Create Post</a>
-@foreach($forum->post as $post)
-{{$post->name}}
-{{$post->description}}
-@endforeach
+
+
 </div>
+<div class="container">
+<main class="grid grid-cols-4 gap-8 mt-8 wrapper">
+@foreach($forum->post as $post)
+       
+
+        <section class="flex flex-col col-span-3 gap-y-4">
+            <small class="text-sm text-gray-400">>Forum>{{$forum->name}}>post</small>
+
+            <article class="p-5 bg-white shadow">
+                <div class="grid grid-cols-8">
+
+                    {{-- Avatar --}}
+                    <div class="col-span-1">
+                       
+                    </div>
+
+                    {{-- Thread --}}
+                    <div class="col-span-7 space-y-6">
+                        <div class="space-y-3">
+                            <h2 class="text-xl tracking-wide hover:text-blue-400"><a href="{{route('forum.post.show',[$forum,$post])}}">{{$post->name}}</a></h2>
+                            <p class="text-gray-500">
+                            {{$post->description}}                            </p>
+                           
+                        </div>
+
+                        <div class="flex justify-between">
+
+                            {{-- Likes --}}
+                            <div class="flex space-x-5 text-gray-500">
+                                
+                                    <span class="text-xs font-bold"><b>Posted by:</b>{{$forum->user->name}}</span>
+                                
+                            </div>
+
+                            {{-- Date Posted --}}
+                            <div class="flex items-center text-xs text-gray-500">
+                            <b>Date:</b> {{ \Carbon\Carbon::createFromTimestamp(strtotime($forum->created_at))->format('d-m-Y   h:i:s  ')}}
+                            @if (Route::has('login'))
+                            @auth
+                            @if($forum->user->id==Auth::user()->id)
+                            <form action="{{ route('forum.destroy',$forum->id) }}" method="Post">
+    
+                            <a class="btn btn-outline-dark" href="{{ route('forum.edit',$forum->id) }}">Edit</a>
+                                @csrf
+                                @method('DELETE')  
+                                <button type="submit" class="btn btn-outline-dark">Delete</button>
+                            </form>
+                            @endauth
+                            @endif
+                             @endif
+       
+                         </section>
+        @endforeach
+    </main>
 
 
-
-
+    </div>
     </body>
 </html>
