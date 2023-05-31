@@ -58,7 +58,7 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left mb-2">
-                    <h2>Edit forum</h2>
+                    <h2>Add forum</h2>
                 </div>
                 <div class="pull-right">
                     <a class="btn btn-outline-dark" href="{{ route('forum.index') }}"> Back</a>
@@ -70,31 +70,33 @@
             {{ session('status') }}
         </div>
         @endif
-        <form action="{{ route('forum.update',$forum) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('forum.post.update',[$forum,$post]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')  
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>forum name:</strong>
-                        <input type="text" name="name" value="{{ $forum->name }}" class="form-control"
-                            placeholder="forum name">
+                        <input type="text" name="name" value="{{ $post->name }}" class="form-control"
+                            placeholder="post name">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>forum description:</strong>
-                        <input type="text" name="description" class="form-control" placeholder="forum description"
-                            value="{{ $forum->description }}">
+                        <input type="text" name="description" class="form-control" placeholder="post description"
+                            value="{{ $post->description }}">
                             @auth
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        @endif
+                        @auth
+                        <input type="hidden" name="forum_id" value="{{ $forum->id}}">
                         @endif
                     </div>
                 </div>
                 <button type="submit" class="btn btn-outline-dark ml-3">Submit</button>
             </div>  
         </form>
-        
     </div>
     </body>
 </html>

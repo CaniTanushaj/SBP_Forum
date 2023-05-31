@@ -83,12 +83,30 @@
 
                 
                 <button type="submit" class="btn btn-outline-dark ml-3">Submit</button>
-            </div>
+           
             
         </form>
     @foreach($post->comment as $comment)
-    {{$comment->content}}
+   <div class="row p-2 m-3 border border-2 rounded" > 
+    <div class="col-md-6">
+   <b>{{$comment->user->name}}:</b></br>
+   {{$comment->content}}
+   </div>
+   <div class="col-md-6 ">
+   @if (Route::has('login'))
+            @auth
+        @if($comment->user->id==Auth::user()->id ||$post->user->id==Auth::user()->id )
+   <form action="{{ route('post.comment.destroy',[$post->id,$comment->id]) }}" method="Post">
+            @csrf
+        @method('DELETE')  
+        <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-outline-dark btn-sm float-right">Delete</button>
+    </form>
+    @endauth
+                            @endif
+                             @endif
+   </div>
+   </div>
     @endforeach
-</div>
+    </div>
     </body>
 </html>

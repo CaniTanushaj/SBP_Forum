@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -75,8 +76,15 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy($post_id,$comment_id)
     {
-        //
+        $post=Post::find($post_id);
+        $forum_id=$post['forum_id'];
+    $comment=Comment::find($comment_id)->delete();
+        return redirect()->route('forum.post.show',[$forum_id,$post_id])
+
+                        ->with('success','Comment deleted successfully');
+
+    
     }
 }

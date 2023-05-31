@@ -82,13 +82,13 @@ class ForumController extends Controller
 
         
 
-        $product->update($request->all());
+        $forum->update($request->all());
 
         
 
         return redirect()->route('forum.index')
 
-                        ->with('success','Product updated successfully');
+                        ->with('success','Forum updated successfully');
     }
 
     /**
@@ -103,7 +103,7 @@ class ForumController extends Controller
 
         return redirect()->route('forum.index')
 
-                        ->with('success','Product deleted successfully');
+                        ->with('success','Forum deleted successfully');
 
     
     }

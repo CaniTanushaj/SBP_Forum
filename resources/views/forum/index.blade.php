@@ -111,7 +111,7 @@
                             <a class="btn btn-outline-dark" href="{{ route('forum.edit',$forum->id) }}">Edit</a>
                                 @csrf
                                 @method('DELETE')  
-                                <button type="submit" class="btn btn-outline-dark">Delete</button>
+                                <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-outline-dark">Delete</button>
                             </form>
                             @endauth
                             @endif

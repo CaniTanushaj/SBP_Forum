@@ -95,7 +95,7 @@
                             {{-- Likes --}}
                             <div class="flex space-x-5 text-gray-500">
                                 
-                                    <span class="text-xs font-bold"><b>Posted by:</b>{{$forum->user->name}}</span>
+                                    <span class="text-xs font-bold"><b>Posted by:</b>{{$post->user->name}}</span>
                                 
                             </div>
 
@@ -104,13 +104,13 @@
                             <b>Date:</b> {{ \Carbon\Carbon::createFromTimestamp(strtotime($forum->created_at))->format('d-m-Y   h:i:s  ')}}
                             @if (Route::has('login'))
                             @auth
-                            @if($forum->user->id==Auth::user()->id)
-                            <form action="{{ route('forum.destroy',$forum->id) }}" method="Post">
+                            @if($post->user->id==Auth::user()->id ||$forum->user->id==Auth::user()->id )
+                            <form action="{{ route('forum.post.destroy',[$forum->id,$post->id]) }}" method="Post">
     
-                            <a class="btn btn-outline-dark" href="{{ route('forum.edit',$forum->id) }}">Edit</a>
+                            <a class="btn btn-outline-dark" href="{{ route('forum.post.edit',[$forum,$post]) }}">Edit</a>
                                 @csrf
                                 @method('DELETE')  
-                                <button type="submit" class="btn btn-outline-dark">Delete</button>
+                                <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-outline-dark">Delete</button>
                             </form>
                             @endauth
                             @endif

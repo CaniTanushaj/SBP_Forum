@@ -50,4 +50,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Forum::class);
     }
+    public function post()
+    {
+        return $this->hasMany(Post::class);
+    }
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

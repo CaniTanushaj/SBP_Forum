@@ -51,7 +51,7 @@ class PostController extends Controller
 
         return redirect()->route('forum.show',$request['forum_id'])
 
-                        ->with('success','post created successfully.');
+                        ->with('success','Post created successfully.');
     }
 
     /**
@@ -65,15 +65,15 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(post $post)
+    public function edit(forum $forum,post $post)
     {
-        return view('post.edit',compact('post'));
+        return view('post.edit',compact('forum','post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, post $post)
+    public function update(Request $request,$forum, post $post)
     {
         $request->validate([
 
@@ -85,28 +85,28 @@ class PostController extends Controller
 
         
 
-        $product->update($request->all());
+        $post->update($request->all());
 
         
 
-        return redirect()->route('post.index')
+        return redirect()->route('forum.show',$request['forum_id'])
 
-                        ->with('success','Product updated successfully');
+        ->with('success','Post created successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($forum_id,$post_id)
     {
 
-    $product=post::find($id)->delete();
+    $product=post::find($post_id)->delete();
 
          
 
-        return redirect()->route('post.index')
+        return redirect()->route('forum.show',$forum_id)
 
-                        ->with('success','Product deleted successfully');
+                        ->with('success','Post deleted successfully');
 
     
     }
