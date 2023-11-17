@@ -6,10 +6,10 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="sbpforum1.png" alt="project-screenshot" width="400" height="400/">
-<img src="sbpforum2.png" alt="project-screenshot" width="400" height="400/">
-<img src="sbpforum3.png" alt="project-screenshot" width="400" height="400/">
-<img src="sbpforumlogin.png" alt="project-screenshot" width="400" height="400/">
+<img src="sbpforum1.png" alt="project-screenshot" width="640" height="400/">
+<img src="sbpforum2.png" alt="project-screenshot" width="640" height="400/">
+<img src="sbpforum3.png" alt="project-screenshot" width="640" height="400/">
+<img src="sbpforumlogin.png" alt="project-screenshot" width="640" height="400/">
 
 
   
